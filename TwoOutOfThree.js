@@ -26,29 +26,36 @@ Output: []
 Explanation: No value is present in at least two arrays.
 */
 
-/**
+/*
  * @param {number[]} nums1
  * @param {number[]} nums2
  * @param {number[]} nums3
  * @return {number[]}
  */
-var twoOutOfThree = function(nums1, nums2, nums3) {
-    let tmp = [];
-    for ( let i =0 ;i< nums1.length; i++){
-        for(let j=0 ; j<nums2.length ; j++){
-            if (nums1[i] == nums2[j]){
-                if(!tmp.includes(nums2[j])){
-                    tmp.push(nums2[j])
-                }
-            }
-        }
-        for(let k=0 ; k<nums3.length ; k++){
-            if (nums1[i] == nums3[k]){
-                if(!tmp.includes(nums3[k])){
-                    tmp.push(nums3[k])
-                }
-            }
-        }     
+var twoOutOfThree = function (nums1, nums2, nums3) {
+  let tmp = [];
+  for (let i = 0; i < nums1.length; i++) {
+    if (
+      !tmp.includes(nums1[i]) &&
+      (nums2.includes(nums1[i]) || nums3.includes(nums1[i]))
+    ) {
+      tmp.push(nums1[i]);
+      console.log(tmp);
     }
-    return tmp;
+  }
+  for (let i = 0; i < nums2.length; i++) {
+    if (
+      !tmp.includes(nums2[i]) &&
+      (nums1.includes(nums2[i]) || nums3.includes(nums2[i]))
+    ) {
+      tmp.push(nums2[i]);
+      console.log(tmp);
+    }
+  }
+  return tmp;
 };
+
+let nums1 = [3, 1],
+  nums2 = [2, 3],
+  nums3 = [1, 2];
+console.log(twoOutOfThree(nums1, nums2, nums3));
