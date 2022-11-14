@@ -23,8 +23,18 @@ Output: "0"
  * @param {string} num2
  * @return {string}
  */
-var addStrings = function(num1, num2) {
-    let sum="";
-    sum = (+num1)+ (+num2);
-    return (sum+"")    
+let addStrings = function(num1, num2) {
+    let carry = 0;
+    let len1 = num1.length;
+    let len2 = num2.length;
+    let sum = "";
+    while (len1 > 0 || len2 > 0) {
+        let tmp = (+num1[len1 - 1] || 0) + (+num2[len2 - 1] || 0) + carry;
+        sum = tmp % 10 + "" + sum;
+        carry = Math.floor(tmp / 10);
+        len1--;
+        len2--
+    }
+    if (carry) sum = '1' + sum;
+    return sum;  
 };
